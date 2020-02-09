@@ -24,6 +24,8 @@ client.on('connect', function () {
   client.subscribe(mqttTopic, function (err) {
     if (!err) {
       mqttConnected = true;
+    } else {
+      console.log("Could not connect to MQTT broker.")
     }
   })
 });
@@ -36,6 +38,8 @@ receiver.on('data', function(data) {
     for (var i = 0; i < data.length; i++) {
       client.publish(`${mqttTopic}/${i}`, data[i].toString(10));
     }
+  } else {
+    console.log("Received ArtNet data, discarding. Not connected to MQTT broker.");
   }
 });
 
