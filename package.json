@@ -1,0 +1,19 @@
+{
+  "name": "artnet_mqtt_bridge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.lukasklinger.com/lukas/ArtNet_MQTT_Bridge.git"
+  },
+  "author": "lukasklinger",
+  "license": "ISC",
+  "dependencies": {
+    "dmxnet": "^0.4.1",
+    "mqtt": "^3.0.0"
+  }
+}
