@@ -2,26 +2,33 @@ const dmxlib = require('dmxnet');
 const dmxnet = new dmxlib.dmxnet({});
 const mqtt = require('mqtt');
 
-const mqttTopic = "dmx";
-const mqttServer = "192.168.168.3";
+const mqttTopic = process.env.MQTT_TOPIC || "dmx";
+const mqttHost = process.env.MQTT_HOST || "localhost";
 
-var client  = mqtt.connect(`mqtt://${mqttServer}`);
+const net = process.env.ARTNET_NET || "0";
+const subnet = process.env.ARTNET_SUBNET || "0";
+const universe = process.env.ARTNET_UNIVERSE || "0";
+
+var client  = mqtt.connect(`mqtt://${mqttHost}`);
 var mqttConnected = false;
 
+// set up ArtNet receiver
 var receiver = dmxnet.newReceiver({
-  subnet: 0,
-  universe: 0,
-  net: 0,
+  subnet: subnet,
+  universe: universe,
+  net: net
 });
 
+// connect to MQTT broker and check connection
 client.on('connect', function () {
   client.subscribe(mqttTopic, function (err) {
     if (!err) {
       mqttConnected = true;
     }
   })
-})
+});
 
+// publish ArtNet data to MQTT
 receiver.on('data', function(data) {
   if (mqttConnected) {
     client.publish(mqttTopic, JSON.stringify(data));
@@ -31,3 +38,7 @@ receiver.on('data', function(data) {
     }
   }
 });
+
+// logging output
+console.log(`Listening for ArtNet data in network: ${net}, subnet: ${subnet}, universe: ${universe}`);
+console.log(`Sending data to MQTT on host: ${mqttHost}, to topic ${mqttTopic}`);
