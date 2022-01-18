@@ -52,7 +52,7 @@ docker run -p 6454:6454/udp -e MQTT_TOPIC=dmx -e MQTT_HOST=192.168.1.1 artnetMqt
 
 ## Meta
 
-lukasklinger – [@lukespccontrol](https://twitter.com/lukespccontrol) – lukasklinger.com
+lukasklinger – [@cyaniccerulean](https://twitter.com/cyaniccerulean) – lukasklinger.com
 
 [https://github.com/lukasklinger](https://github.com/lukasklinger/)
 
