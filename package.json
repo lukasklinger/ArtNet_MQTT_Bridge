@@ -13,7 +13,7 @@
   "author": "lukasklinger",
   "license": "ISC",
   "dependencies": {
-    "dmxnet": "^0.4.1",
+    "dmxnet": "^0.9.0",
     "mqtt": "^3.0.0"
   }
 }
